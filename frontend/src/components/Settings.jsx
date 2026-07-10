@@ -51,7 +51,7 @@ const Settings = ({ onSettingsUpdate }) => {
         ...data,
         smsBookingTemplate: resolveBookingTemplate(
           data.smsBookingTemplate,
-          data.companyName || 'MAGGI TOOLS'
+          data.companyName || 'LIONS ENGINEERING'
         ),
         smsFollowupTemplate: data.smsFollowupTemplate || '',
         smsReturnTemplate: data.smsReturnTemplate || '',
@@ -72,7 +72,7 @@ const Settings = ({ onSettingsUpdate }) => {
   };
 
   const smsPreview = useMemo(
-    () => previewSmsTemplate(settings.smsBookingTemplate, settings.companyName || 'MAGGI TOOLS'),
+    () => previewSmsTemplate(settings.smsBookingTemplate, settings.companyName || 'LIONS ENGINEERING'),
     [settings.smsBookingTemplate, settings.companyName]
   );
 
@@ -102,7 +102,7 @@ const Settings = ({ onSettingsUpdate }) => {
   const resetBookingTemplate = () => {
     const tpl = DEFAULT_SMS_BOOKING_TEMPLATE.replace(
       /\{companyName\}/g,
-      settings.companyName || 'MAGGI TOOLS'
+      settings.companyName || 'LIONS ENGINEERING'
     );
     setSettings({ ...settings, smsBookingTemplate: tpl });
   };
@@ -118,7 +118,7 @@ const Settings = ({ onSettingsUpdate }) => {
       if (isLegacyShortTemplate(payload.smsBookingTemplate)) {
         payload.smsBookingTemplate = resolveBookingTemplate(
           '',
-          settings.companyName || 'MAGGI TOOLS'
+          settings.companyName || 'LIONS ENGINEERING'
         );
       }
       await api.put('settings', payload);

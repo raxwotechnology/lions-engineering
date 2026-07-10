@@ -42,7 +42,7 @@ const RoleSelection = ({ onRoleSelect, appSettings }) => {
             <img src={TOOL_BRAND_IMAGE} alt="" className="gateway-tool-photo" />
             <div className="gateway-tool-icon"><Wrench size={32} /></div>
           </div>
-          <h1>{appSettings?.companyName || 'RAXWO'} <span>Tool Rentals</span></h1>
+          <h1>{appSettings?.companyName || 'Lions Engineering'}</h1>
           <p>The Standard of Excellence in Equipment Management.</p>
         </div>
 
@@ -76,7 +76,7 @@ const RoleSelection = ({ onRoleSelect, appSettings }) => {
         </div>
 
         <footer className="gateway-footer">
-          <p>© {new Date().getFullYear()} {appSettings?.companyName || 'RAXWO International'}. Secure Gateway System.</p>
+          <p>© {new Date().getFullYear()} {appSettings?.companyName || 'Lions Engineering'}. Secure Gateway System.</p>
         </footer>
       </div>
     </div>

@@ -28,7 +28,7 @@ Total Price: LKR \${(record.totalAmount || 0).toLocaleString()}
 Advance Paid: LKR \${(record.advancePayment || 0).toLocaleString()}
 Balance Due: LKR \${(record.balanceAmount || 0).toLocaleString()}
 
-Thank you for choosing RAXWO TOOL RENTALS!\`.trim();
+Thank you for choosing LIONS ENGINEERING!\`.trim();
 
     setCustomSmsText(detailedBill);
     setSmsModalOpen(true);

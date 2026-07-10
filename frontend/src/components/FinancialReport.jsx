@@ -303,16 +303,16 @@ const FinancialReport = ({ appSettings }) => {
         {/* Document Corporate Header */}
         <div className="report-header">
           <div className="report-header-left">
-            <img src={logoUrl} alt="Maggi Tools Logo" className="report-logo" />
+            <img src={logoUrl} alt="Lions Engineering Logo" className="report-logo" />
             <div className="report-title">
-              <h2>MAGGI TOOLS RENTALS</h2>
+              <h2>LIONS ENGINEERING</h2>
               <p>Industrial Machinery, Tools &amp; Logistics ERP</p>
             </div>
           </div>
           <div className="report-contact-info">
-            <strong>Maggi Tools Rentals (Pvt) Ltd</strong><br />
+            <strong>Lions Engineering (Pvt) Ltd</strong><br />
             No. 458/A, Kandy Road, Kiribathgoda<br />
-            accounts@maggitools.lk · +94 11 485 9632
+            accounts@lions-engineering.com · +94 11 485 9632
           </div>
         </div>
         
@@ -515,7 +515,7 @@ const FinancialReport = ({ appSettings }) => {
 
         {/* Corporate Confidential Footer */}
         <div className="report-footer">
-          <span>{appSettings?.companyName || 'MAGGI TOOLS RENTALS'} Management System · CONFIDENTIAL</span>
+          <span>{appSettings?.companyName || 'LIONS ENGINEERING'} Management System · CONFIDENTIAL</span>
           <span>Generated: {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</span>
         </div>
       </div>

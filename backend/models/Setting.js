@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const settingSchema = new mongoose.Schema({
-  companyName: { type: String, default: 'RAXWO TOOL RENTALS' },
+  companyName: { type: String, default: 'LIONS ENGINEERING' },
   address: { type: String, default: 'No. 241, Rajamaha Vihara Rd, Mirihana, Kotte.' },
   phones: [{ type: String }],
   email: { type: String, default: 'info@raxwo.com' },

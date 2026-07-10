@@ -121,7 +121,7 @@ export function formatSmsFromBuilder(builder, record) {
 
   const f = (val) => (val !== '' && val != null ? `LKR ${Number(val).toLocaleString()}` : '-');
 
-  return `--- MAGGI TOOLS BOOKING BILL ---
+  return `--- LIONS ENGINEERING BOOKING BILL ---
 Customer: ${record.clientName || 'Customer'}
 Phone: ${record.clientPhone || 'N/A'}
 NIC: ${record.clientNic || 'N/A'}
@@ -143,5 +143,5 @@ Total Price: ${f(builder.totalPrice)}
 Paid: ${f(builder.advancePaid)}
 Balance Due: ${f(builder.balanceDue)}
 
-${builder.policies || 'Thank you for choosing MAGGI TOOLS!'}`.trim();
+${builder.policies || 'Thank you for choosing LIONS ENGINEERING!'}`.trim();
 }

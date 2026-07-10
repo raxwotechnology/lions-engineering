@@ -1,7 +1,7 @@
 const fs = require('fs');
 let content = fs.readFileSync('backend/routes/bookings.js', 'utf8');
 
-const targetHelper = /const detailedBill = `[\s\S]*?Thank you for choosing \$\{settings\?\.companyName \|\| 'RAXWO TOOL RENTALS'\}!`\.trim\(\);/;
+const targetHelper = /const detailedBill = `[\s\S]*?Thank you for choosing \$\{settings\?\.companyName \|\| 'LIONS ENGINEERING'\}!`\.trim\(\);/;
 
 const newHelper = `const formatMoney = (val) => (val && val > 0) ? \`LKR \${val.toLocaleString()}\` : '-';
 
@@ -23,7 +23,7 @@ Total Price: \${formatMoney(bookingData.totalAmount)}
 Advance Paid: \${formatMoney(bookingData.advancePayment)}
 Balance Due: \${formatMoney(bookingData.balanceAmount)}
 
-Thank you for choosing \${settings?.companyName || 'RAXWO TOOL RENTALS'}!\`.trim();`;
+Thank you for choosing \${settings?.companyName || 'LIONS ENGINEERING'}!\`.trim();`;
 
 content = content.replace(targetHelper, newHelper);
 fs.writeFileSync('backend/routes/bookings.js', content);

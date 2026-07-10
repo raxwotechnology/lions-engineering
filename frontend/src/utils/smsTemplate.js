@@ -164,7 +164,8 @@ function buildItemsBreakdown(bookingData = {}) {
 }
 
 function buildSampleBillLink() {
-  return 'View Bill: https://maggi-tool-rentals.netlify.app/bill/sample-token';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://lions-engineering.netlify.app';
+  return `View Bill: ${origin}/bill/sample-token`;
 }
 
 function migrateBookingTemplate(template) {
@@ -193,14 +194,14 @@ export function isLegacyShortTemplate(template) {
   return t.length < 120 && t.includes('Dear {clientName}');
 }
 
-export function resolveBookingTemplate(stored, companyName = 'MAGGI TOOLS') {
+export function resolveBookingTemplate(stored, companyName = 'LIONS ENGINEERING') {
   if (isLegacyShortTemplate(stored)) {
     return DEFAULT_SMS_BOOKING_TEMPLATE.replace(/\{companyName\}/g, companyName);
   }
   return migrateBookingTemplate(stored).replace(/\{companyName\}/g, companyName);
 }
 
-export function previewSmsTemplate(template, companyName = 'MAGGI TOOLS') {
+export function previewSmsTemplate(template, companyName = 'LIONS ENGINEERING') {
   const booking = { ...SAMPLE_BOOKING };
   const itemsList = booking.items || [];
   const accList = booking.accessories || [];
@@ -249,8 +250,9 @@ export function previewSmsTemplate(template, companyName = 'MAGGI TOOLS') {
 }
 
 export function previewAdvanceSmsTemplate(template, settings = {}) {
-  const companyName = 'MAGGI TOOLS';
-  const billLink = 'View Bill: https://maggi-tools.netlify.app/bill/sample-token';
+  const companyName = 'LIONS ENGINEERING';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://lions-engineering.netlify.app';
+  const billLink = `View Bill: ${origin}/bill/sample-token`;
   let result = (template && template.trim()) ? template.trim() : DEFAULT_SMS_ADVANCE_TEMPLATE;
   const replacements = {
     '{clientName}': 'Sample Customer',

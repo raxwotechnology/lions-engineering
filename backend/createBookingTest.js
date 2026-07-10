@@ -13,7 +13,7 @@ async function test() {
       clientName: 'theeksh',
       clientPhone: '0776995285',
       clientNic: '2002',
-      pickupLocation: 'Maggi Tools Weliweriya',
+      pickupLocation: 'Lions Engineering Weliweriya',
       items: [],
       accessories: [{
         accessoryId: '6a25536fbb8b2bd8f7f2c6ee',

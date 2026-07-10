@@ -5,7 +5,7 @@ import { amountToWords } from './numberToWords';
 import api from '../services/api';
 
 const COMPANY_DETAILS = {
-  name: 'MAGGI TOOLS',
+  name: 'LIONS ENGINEERING',
   address: 'No. 241, Rajamaha Vihara Rd, Mirihana, Kotte.',
   phones: ['+94 775 085 815', '+94 723 627 888', '+94 766 779 603'],
   email: 'info@raxwo.com',

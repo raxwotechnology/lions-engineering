@@ -56,7 +56,7 @@ const Login = ({ onLoginSuccess, roleContext, onBack, appSettings }) => {
             <img src={TOOL_BRAND_IMAGE} alt="" className="tool-brand-photo" />
             <div className="tool-brand-icon"><Wrench size={28} /></div>
           </div>
-          <h1>{appSettings?.companyName || 'Professional'} <br /><span>Inventory.</span></h1>
+          <h1>{appSettings?.companyName || 'Lions Engineering'}</h1>
           <p>Professional Tool Rental & Management Solutions for modern industries.</p>
         </div>
       </div>
@@ -121,7 +121,7 @@ const Login = ({ onLoginSuccess, roleContext, onBack, appSettings }) => {
           </form>
 
           <div className="auth-footer">
-            <p>© 2026 {appSettings?.companyName || 'Maggi Tool Rentals'}. Professional Equipment Ecosystem.</p>
+            <p>© 2026 {appSettings?.companyName || 'Lions Engineering'}. Professional Equipment Ecosystem.</p>
           </div>
         </div>
       </div>

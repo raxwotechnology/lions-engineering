@@ -15,8 +15,8 @@ const allowedOrigins = [
   'http://[::1]:3000',
   'https://krishantransports.netlify.app',
   'https://krishan-transport-frontend.vercel.app',
-  'https://raxwo-rent-a-car.netlify.app',
-    'https://maggi-tool-rentals.netlify.app',
+  'https://Lions Engineering.netlify.app',
+    'https://lions-engineering.netlify.app',
     process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -73,14 +73,14 @@ app.use('/api/cheques', require('./routes/cheques'));
 app.use('/api/settings', require('./routes/settings'));
 
 app.get('/', (req, res) => {
-  res.send('Maggi Tool Rental System API is running...');
+  res.send('Lions Engineering API is running...');
 });
 
 // Start server for Node hosts (Render/local), but avoid starting inside Vercel serverless runtime.
 // Start server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-  console.log(`🚀 Maggi Tool Rental Backend running on PORT: ${PORT}`);
+  console.log(`🚀 Lions Engineering Backend running on PORT: ${PORT}`);
   console.log(`📡 Database: ${dbName}`);
 });
 

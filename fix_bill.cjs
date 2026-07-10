@@ -1,7 +1,7 @@
 const fs = require('fs');
 let content = fs.readFileSync('frontend/src/components/BookingBook.jsx', 'utf8');
 
-const targetHelper = /const generateDetailedBill = \(record\) => \{[\s\S]*?Thank you for choosing RAXWO TOOL RENTALS!'\.trim\(\);\s*\};/;
+const targetHelper = /const generateDetailedBill = \(record\) => \{[\s\S]*?Thank you for choosing LIONS ENGINEERING!'\.trim\(\);\s*\};/;
 
 const newHelper = `const generateDetailedBill = (record) => {
     if (!record) return '';
@@ -30,7 +30,7 @@ Total: \${formatMoney(record.totalAmount)}
 Paid: \${formatMoney(record.advancePayment)}
 Balance Due: \${formatMoney(record.balanceAmount)}
 
-Thank you for choosing RAXWO TOOL RENTALS!\`.trim();
+Thank you for choosing LIONS ENGINEERING!\`.trim();
   };`;
 
 content = content.replace(targetHelper, newHelper);

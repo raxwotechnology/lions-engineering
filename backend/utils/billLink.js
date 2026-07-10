@@ -12,7 +12,7 @@ function getPublicFrontendBase() {
   return (
     process.env.FRONTEND_URL ||
     process.env.PUBLIC_FRONTEND_URL ||
-    'https://maggi-tools.netlify.app'
+    'https://lions-engineering.netlify.app'
   ).replace(/\/$/, '');
 }
 

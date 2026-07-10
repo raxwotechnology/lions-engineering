@@ -38,7 +38,7 @@ const BookingForm = ({ onSubmit, onCancel, initialData }) => {
     clientNic: '',
     clientName: '',
     clientPhone: '',
-    pickupLocation: 'Maggi Tools Weliweriya',
+    pickupLocation: 'Lions Engineering Weliweriya',
     returnLocation: '',
     conditionOnPickup: '',
     notes: '',

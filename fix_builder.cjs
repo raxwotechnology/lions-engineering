@@ -9,7 +9,7 @@ const generateFunc = `  const [smsBuilder, setSmsBuilder] = useState({
     advancePaid: '',
     totalPrice: '',
     balanceDue: '',
-    policies: 'Thank you for choosing RAXWO TOOL RENTALS!'
+    policies: 'Thank you for choosing LIONS ENGINEERING!'
   });
 
   const getSmsString = (builder, record) => {
@@ -52,14 +52,14 @@ Balance Due: \${f(builder.balanceDue)}
       totalPrice: record.totalAmount || '',
       advancePaid: record.advancePayment || '',
       balanceDue: record.balanceAmount || '',
-      policies: 'Thank you for choosing RAXWO TOOL RENTALS!'
+      policies: 'Thank you for choosing LIONS ENGINEERING!'
     };
     setSmsBuilder(builder);
     setCustomSmsText(getSmsString(builder, record));
   };`;
 
 // Replace the old helper
-const oldHelperRegex = /const generateDetailedBill = \(record\) => \{[\s\S]*?Thank you for choosing RAXWO TOOL RENTALS!`\.trim\(\);\s*\};/;
+const oldHelperRegex = /const generateDetailedBill = \(record\) => \{[\s\S]*?Thank you for choosing LIONS ENGINEERING!`\.trim\(\);\s*\};/;
 content = content.replace(oldHelperRegex, generateFunc);
 
 content = content.replace(/setCustomSmsText\(generateDetailedBill\(firstBooking\)\);/g, 'initSmsBuilder(firstBooking);');

@@ -341,7 +341,7 @@ const BookingBook = ({ setActiveTab }) => {
     if (!record.clientPhone) return alert('No phone number found.');
 
     const phone = record.clientPhone.replace(/[^0-9]/g, '');
-    const msg = encodeURIComponent(`Reminder from DVD Tool Rentals: Dear ${record.clientName}, your rental of ${record.tool ? record.tool.number : 'Tool'} is due on ${new Date(record.returnDate).toLocaleDateString()}. Please ensure timely return to avoid extra charges.`);
+    const msg = encodeURIComponent(`Reminder from Lions Engineering: Dear ${record.clientName}, your rental of ${record.tool ? record.tool.number : 'Tool'} is due on ${new Date(record.returnDate).toLocaleDateString()}. Please ensure timely return to avoid extra charges.`);
     window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
   };
 
