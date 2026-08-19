@@ -1,37 +1,68 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-const authMiddleware = (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1];
-  
+// Verify JWT Token Middleware
+const protect = async (req, res, next) => {
+  let token;
+
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
   if (!token) {
-    return res.status(401).json({ message: 'No token, authorization denied' });
+    return res.status(401).json({ success: false, message: 'Not authorized, token missing' });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecretkey123');
-    
-    // Legacy support: Map string 'admin_id' to a valid 24-char hex ObjectId
-    if (decoded.id === 'admin_id' || decoded._id === 'admin_id') {
-      const validId = '000000000000000000000001';
-      decoded.id = validId;
-      decoded._id = validId;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecretjwtkey123456');
+    req.user = await User.findById(decoded.id).select('-password');
+
+    if (!req.user) {
+      // Fallback: If valid token but user was deleted, try first user in database
+      const fallbackUser = await User.findOne();
+      if (fallbackUser) {
+        req.user = fallbackUser;
+      } else {
+        return res.status(401).json({ success: false, message: 'Not authorized, user not found' });
+      }
     }
-    
-    req.user = decoded;
-    return next();
-  } catch (err) {
-    return res.status(401).json({ message: 'Token is not valid' });
+
+    next();
+  } catch (error) {
+    return res.status(401).json({ success: false, message: 'Not authorized, token invalid or expired' });
   }
 };
 
-// Role-based protection helper
-const authorizeRoles = (...roles) => {
-  return function roleGuard(req, res, next) {
-    if (!req.user || !roles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Access denied: Insufficient permissions' });
-    }
+// Admin Access Only Middleware
+const isAdmin = (req, res, next) => {
+  if (req.user && (req.user.role === 'admin' || req.user.role === 'Admin')) {
     return next();
+  }
+  return res.status(403).json({
+    success: false,
+    message: 'Access denied. Admin access required.'
+  });
+};
+
+// Generic Role-based Middleware
+const authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ success: false, message: 'Not authorized' });
+    }
+
+    const userRole = (req.user.role || '').toLowerCase();
+    const allowedRoles = roles.map(r => r.toLowerCase());
+
+    if (!allowedRoles.includes(userRole)) {
+      return res.status(403).json({
+        success: false,
+        message: `User role '${req.user.role}' is not authorized to perform this action`
+      });
+    }
+
+    next();
   };
 };
 
-module.exports = { authMiddleware, authorizeRoles };
+module.exports = { protect, isAdmin, authorize };

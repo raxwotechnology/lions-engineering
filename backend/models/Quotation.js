@@ -1,38 +1,56 @@
 const mongoose = require('mongoose');
 
-const QuotationSchema = new mongoose.Schema({
-  quotationNo: { type: String, required: true, unique: true },
-  date: { type: Date, default: Date.now },
-  clientName: { type: String, required: true },
-  clientAddress: { type: String },
-  
-  // Specifications
-  toolCategory: { type: String },
-  toolNo: { type: String },
-  toolSpec1: { type: String },
-  toolSpec2: { type: String },
-  items: [{
-    toolNumber: String,
-    model: String,
-    quantity: { type: Number, default: 1 },
-    days: { type: Number, default: 1 },
-    dailyRate: { type: Number, default: 0 },
-    lineTotal: { type: Number, default: 0 }
-  }],
-  refundableDeposit: { type: Number, default: 0 },
-  
-  // Charges
-  mandatoryCharge: { type: Number, default: 0 },
-  transportCharge: { type: Number, default: 0 },
-  extraHourRate: { type: Number, default: 0 },
-  discount: { type: Number, default: 0 },
-  
-  // Terms
-  validityDays: { type: Number, default: 30 },
-  termsAndConditions: { type: String },
-  
-  estimatedTotal: { type: Number, default: 0 },
-  status: { type: String, enum: ['Draft', 'Sent', 'Accepted', 'Rejected', 'Cancelled'], default: 'Draft' }
-}, { timestamps: true });
+const quotationItemSchema = new mongoose.Schema({
+  tool: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tool'
+  },
+  toolName: String,
+  dailyRate: Number,
+  days: Number,
+  quantity: Number,
+  amount: Number
+});
 
-module.exports = mongoose.model('Quotation', QuotationSchema);
+const quotationSchema = new mongoose.Schema(
+  {
+    quotationNumber: {
+      type: String,
+      unique: true,
+      uppercase: true
+    },
+    customer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Customer'
+    },
+    customerName: String,
+    customerEmail: String,
+    items: [quotationItemSchema],
+    subtotal: Number,
+    discount: {
+      type: Number,
+      default: 0
+    },
+    tax: {
+      type: Number,
+      default: 0
+    },
+    totalAmount: {
+      type: Number,
+      required: true
+    },
+    validUntil: {
+      type: Date,
+      required: true
+    },
+    status: {
+      type: String,
+      enum: ['Draft', 'Sent', 'Approved', 'Rejected', 'Converted'],
+      default: 'Draft'
+    },
+    notes: String
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model('Quotation', quotationSchema);

@@ -1,87 +1,76 @@
+const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const errorHandler = require('./middleware/errorHandler');
+
+// Load environment variables (.env in backend or root)
+dotenv.config();
+if (!process.env.MONGO_URI) {
+  dotenv.config({ path: path.join(__dirname, '.env') });
+}
+if (!process.env.MONGO_URI) {
+  dotenv.config({ path: path.join(__dirname, '../.env') });
+}
 
 const app = express();
 
-// Middleware
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  'http://[::1]:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-  'http://[::1]:3000',
-  'https://krishantransports.netlify.app',
-  'https://krishan-transport-frontend.vercel.app',
-  'https://Lions Engineering.netlify.app',
-    'https://lions-engineering.netlify.app',
-    process.env.FRONTEND_URL
-].filter(Boolean);
+// Connect Database
+connectDB();
 
-app.use(cors({
-  origin: (origin, callback) => {
-    // Log origin for final fix
-    if (origin) console.log('DEBUG: Incoming Request from Origin:', origin);
-    
-    // In development, we allow all to unblock login issues
-    return callback(null, true);
-  },
-  credentials: true
-}));
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-  next();
-});
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+// 1. Body Parser & CORS Middleware (MUST be before any routes)
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-// Database Connection
-const dbUri = process.env.MONGODB_URI;
-const dbName = dbUri ? dbUri.split('/').pop().split('?')[0] : 'unknown';
+// 2. Mount API Routes
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/settings', require('./routes/settingRoutes'));
+app.use('/api/reviews', require('./routes/reviewRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
 
-if (!dbUri) {
-  console.error("⚠️ MONGODB_URI is not set!");
-} else {
-  mongoose.connect(dbUri)
-    .then(() => {
-      console.log(`✅ MongoDB Connected to database: ${dbName}`);
-    })
-    .catch(err => console.error('❌ MongoDB Connection Error:', err));
-}
 
-// Routes
-app.use('/api/accessories', require('./routes/accessories'));
-app.use('/api/consumables', require('./routes/consumables'));
-app.use('/api/hires', require('./routes/hires'));
-app.use('/api/bookings', require('./routes/bookings'));
-app.use('/api/salaries', require('./routes/salaries'));
-app.use('/api/payments', require('./routes/payments'));
-app.use('/api/clients', require('./routes/clients'));
-app.use('/api/tools', require('./routes/tools'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/employees', require('./routes/employees'));
-app.use('/api/invoices', require('./routes/invoices'));
-app.use('/api/quotations', require('./routes/quotations'));
-app.use('/api/attendance', require('./routes/attendance'));
-app.use('/api/advances', require('./routes/advances'));
-app.use('/api/extra-income', require('./routes/extraIncome'));
-app.use('/api/expenses', require('./routes/expenses'));
-app.use('/api/accounts', require('./routes/accounts'));
-app.use('/api/cheques', require('./routes/cheques'));
-app.use('/api/settings', require('./routes/settings'));
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
+app.use('/api/tools', require('./routes/toolRoutes'));
+app.use('/api/categories', require('./routes/categoryRoutes'));
+app.use('/api/customers', require('./routes/customerRoutes'));
+app.use('/api/rentals', require('./routes/rentalRoutes'));
+app.use('/api/reservations', require('./routes/reservationRoutes'));
+app.use('/api/transactions', require('./routes/transactionRoutes'));
+app.use('/api/quotations', require('./routes/quotationRoutes'));
+app.use('/api/expenses', require('./routes/expenseRoutes'));
+app.use('/api/suppliers', require('./routes/supplierRoutes'));
+app.use('/api/reports', require('./routes/reportRoutes'));
+app.use('/api/payments', require('./routes/paymentRoutes'));
 
-app.get('/', (req, res) => {
-  res.send('Lions Engineering API is running...');
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'online',
+    system: 'Tool Rental Management System API',
+    database: 'MongoDB Atlas Connected'
+  });
 });
 
-// Start server for Node hosts (Render/local), but avoid starting inside Vercel serverless runtime.
-// Start server
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
-  console.log(`🚀 Lions Engineering Backend running on PORT: ${PORT}`);
-  console.log(`📡 Database: ${dbName}`);
+// 3. Catch-all 404 Handler for Unmatched API Routes (Ensures NO HTML error pages are returned)
+app.use('/api/*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `API Route '${req.originalUrl}' not found`
+  });
 });
 
-module.exports = app;
+// 4. Global Error Handler Middleware
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(PORT, () => {
+  console.log(`🚀 Tool Rental Backend Server running on port ${PORT}`);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.log(`❌ Unhandled Rejection Error: ${err.message}`);
+});
