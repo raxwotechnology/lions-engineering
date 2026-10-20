@@ -61,12 +61,14 @@ const seedDB = async () => {
         brand: t.brand,
         modelNumber: t.modelNumber,
         serialNumber: t.serialNumber,
+        pricePerDay: t.dailyRate || 0,
         dailyRate: t.dailyRate,
         depositAmount: t.depositAmount,
         status: t.status,
         condition: t.condition,
         description: t.description
       });
+
       toolsMap[t.name] = createdTool._id;
       toolsMap[t.id] = createdTool._id;
     }

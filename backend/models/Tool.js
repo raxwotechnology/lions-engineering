@@ -18,8 +18,8 @@ const toolSchema = new mongoose.Schema(
     },
     pricePerDay: {
       type: Number,
-      required: [true, 'Please add price per day'],
-      min: 0
+      min: 0,
+      default: 0
     },
     isAvailable: {
       type: Boolean,
@@ -28,7 +28,7 @@ const toolSchema = new mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'Tool must belong to an owner']
+      default: null
     },
     imageUrl: {
       type: String,

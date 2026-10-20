@@ -27,8 +27,11 @@ import {
   Crown,
   Shield,
   Zap,
-  Flame
+  Flame,
+  Boxes,
+  ShoppingCart
 } from 'lucide-react';
+
 
 export const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   const { user, logout } = useAuth();
@@ -153,7 +156,15 @@ export const Sidebar = ({ mobileOpen, setMobileOpen }) => {
       ]
     },
     {
+      title: 'STOCK & POS',
+      items: [
+        { name: 'Stock Inventory', path: '/inventory', icon: Boxes, roles: ['admin', 'manager', 'owner'] },
+        { name: 'Point of Sale (POS)', path: '/pos', icon: ShoppingCart, roles: ['admin', 'manager', 'owner'] }
+      ]
+    },
+    {
       title: 'SALES & FINANCE',
+
       items: [
         { name: 'Transactions & Billing', path: '/transactions', icon: Receipt, roles: ['admin', 'manager', 'owner'] },
         { name: 'Rental Quotations', path: '/quotations', icon: FileText, roles: ['admin', 'manager', 'customer'] },

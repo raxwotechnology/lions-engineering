@@ -16,6 +16,9 @@ import { Suppliers } from '../pages/Suppliers';
 import { Reports } from '../pages/Reports';
 import { Profile } from '../pages/Profile';
 import { SupportSettings } from '../pages/SupportSettings';
+import { Inventory } from '../pages/Inventory';
+import { POS } from '../pages/POS';
+
 
 // Case-Insensitive Protected Route Helper
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -137,7 +140,26 @@ export const AppRoutes = () => {
         }
       />
 
+      <Route
+        path="/inventory"
+        element={
+          <ProtectedRoute allowedRoles={['admin', 'manager', 'owner']}>
+            <Inventory />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/pos"
+        element={
+          <ProtectedRoute allowedRoles={['admin', 'manager', 'owner']}>
+            <POS />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
+
