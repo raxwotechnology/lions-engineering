@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     let settings = await Setting.findOne();
     if (!settings) {
       settings = await Setting.create({
-        companyName: 'RAXWO TOOL RENTALS',
+        companyName: 'LION TOOLS',
         phones: ['+94 775 085 815', '+94 723 627 888', '+94 766 779 603']
       });
     }

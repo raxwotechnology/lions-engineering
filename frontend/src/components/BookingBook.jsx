@@ -446,7 +446,7 @@ const BookingBook = ({ setActiveTab }) => {
     const paid = Number(record.advancePayment || 0).toLocaleString();
     const bal = Number(record.balanceAmount || 0).toLocaleString();
     const msg = encodeURIComponent(
-      `Hello ${record.clientName || 'Customer'},\nHere is your rental bill from MAGGI TOOLS:\nTotal: LKR ${total}\nPaid: LKR ${paid}\nBalance Due: LKR ${bal}\n\nView Bill Details online:\n${billUrl}\n\nThank you!`
+      `Hello ${record.clientName || 'Customer'},\nHere is your rental bill from LION TOOLS:\nTotal: LKR ${total}\nPaid: LKR ${paid}\nBalance Due: LKR ${bal}\n\nView Bill Details online:\n${billUrl}\n\nThank you!`
     );
     window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
   };

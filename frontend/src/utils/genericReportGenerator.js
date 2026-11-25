@@ -15,7 +15,7 @@ const THEME = {
 };
 
 const DEFAULT_SETTINGS = {
-  companyName: 'MAGGI TOOLS',
+  companyName: 'LION TOOLS',
   address: 'No. 241, Rajamaha Vihara Rd, Mirihana, Kotte.',
   phones: ['+94 777 782 015', '+94 773 123 073', '+94 707 782 015', '+94 777 778 845'],
   email: 'sampathperera253@gmail.com'

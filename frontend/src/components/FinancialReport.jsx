@@ -315,12 +315,12 @@ const FinancialReport = ({ appSettings }) => {
           <div className="report-header-left">
             <img src={settings?.logo || logoUrl} alt="Company Logo" className="report-logo" />
             <div className="report-title">
-              <h2>{settings?.companyName || 'MAGGI TOOLS RENTALS'}</h2>
+              <h2>{settings?.companyName || 'LION TOOLS'}</h2>
               <p>Industrial Machinery, Tools &amp; Logistics ERP</p>
             </div>
           </div>
           <div className="report-contact-info">
-            <strong>{settings?.companyName || 'MAGGI TOOLS RENTALS'}</strong><br />
+            <strong>{settings?.companyName || 'LION TOOLS'}</strong><br />
             {settings?.address || 'No. 241, Rajamaha Vihara Rd, Mirihana, Kotte.'}<br />
             {settings?.email || 'sampathperera253@gmail.com'} · {Array.isArray(settings?.phones) && settings?.phones.length > 0 ? settings.phones.slice(0, 2).join(' | ') : '+94 777 782 015'}
           </div>
@@ -525,7 +525,7 @@ const FinancialReport = ({ appSettings }) => {
 
         {/* Corporate Confidential Footer */}
         <div className="report-footer">
-          <span>{appSettings?.companyName || 'MAGGI TOOLS RENTALS'} Management System · CONFIDENTIAL</span>
+          <span>{appSettings?.companyName || 'LION TOOLS'} Management System · CONFIDENTIAL</span>
           <span>Generated: {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</span>
         </div>
       </div>

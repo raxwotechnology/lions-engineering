@@ -1,4 +1,4 @@
-# How to run Maggi Tool Rental System locally
+# How to run Lion Tools Rental System locally
 
 1. Make sure you have Node.js installed.
 2. Double-click the `run-locally.bat` file in the main folder.

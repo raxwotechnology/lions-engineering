@@ -1376,7 +1376,7 @@ router.put('/:id/partial-return', authMiddleware, async (req, res) => {
         const billUrl = generateBillViewUrl(savedBooking._id);
 
         let smsText = settings?.smsReturnTemplate;
-        const companyName = 'MAGGI TOOLS';
+        const companyName = settings?.companyName || 'LION TOOLS';
         const pickupDateObj = new Date(savedBooking.pickupDate);
         pickupDateObj.setHours(0, 0, 0, 0);
 
@@ -1842,7 +1842,7 @@ router.post('/process-overdue-charges', authMiddleware, async (req, res) => {
               let template = settings?.smsOverdueReminderTemplate || 'Dear {clientName}, your rental of {itemName} is overdue by {overdueDays} days. Added rent: LKR {dailyRate} per day. Total overdue: LKR {overdueCharge}. Please return immediately.';
               const msg = template
                 .replace(/\{clientName\}/g, booking.clientName || 'Customer')
-                .replace(/\{companyName\}/g, settings?.companyName || 'MAGGI TOOLS')
+                .replace(/\{companyName\}/g, settings?.companyName || 'LION TOOLS')
                 .replace(/\{itemName\}/g, itemNames)
                 .replace(/\{overdueDays\}/g, String(bookingTotalOverdueDays))
                 .replace(/\{dailyRate\}/g, `LKR ${dailyOverdueRate.toLocaleString()}`)

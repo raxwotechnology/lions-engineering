@@ -24,11 +24,11 @@ const sendSMS = async (to, message) => {
 
     const userId = process.env.SMS_USER_ID;
     const apiKey = process.env.SMS_API_KEY;
-    const senderId = process.env.SMS_SENDER_ID || 'SMSlenzDEMO';
+    const senderId = process.env.SMS_SENDER_ID || 'Lion Tools';
 
     if (!userId || !apiKey) {
-      console.error('[SMS SERVICE] Credentials missing in .env');
-      return { success: false, error: 'SMS credentials missing' };
+      console.warn('[SMS SERVICE] SMS credentials not configured in .env. Skipping SMS.');
+      return { success: false, error: 'SMS credentials not configured' };
     }
 
     // POST avoids URL length limits that truncate long bill messages on GET

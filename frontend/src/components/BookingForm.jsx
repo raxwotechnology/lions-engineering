@@ -42,7 +42,7 @@ const BookingForm = ({ onSubmit, onCancel, initialData }) => {
     clientNic: '',
     clientName: '',
     clientPhone: '',
-    pickupLocation: 'Maggi Tools Weliweriya',
+    pickupLocation: 'Lion Tools',
     returnLocation: '',
     pickupDate: new Date().toISOString().split('T')[0],
     pickupTime: new Date().toTimeString().slice(0, 5),

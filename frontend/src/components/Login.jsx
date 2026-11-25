@@ -121,7 +121,7 @@ const Login = ({ onLoginSuccess, roleContext, onBack, appSettings }) => {
           </form>
 
           <div className="auth-footer">
-            <p>© 2026 {appSettings?.companyName || 'Maggi Tool Rentals'}. Professional Equipment Ecosystem.</p>
+            <p>© 2026 {appSettings?.companyName || 'Lion Tools'}. Professional Equipment Ecosystem.</p>
           </div>
         </div>
       </div>

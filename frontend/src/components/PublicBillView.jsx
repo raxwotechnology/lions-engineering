@@ -17,10 +17,10 @@ const getApiBase = () => {
     import.meta.env.VITE_API_URL ||
     (isLocal
       ? `http://${window.location.hostname}:5001/api`
-      : 'https://maggietools.onrender.com/api');
+      : '/api');
 
   let trimmed = (raw || '').trim();
-  if (!trimmed) trimmed = 'https://maggietools.onrender.com/api';
+  if (!trimmed) trimmed = '/api';
   if (trimmed.toLowerCase().endsWith('/api')) trimmed += '/';
   else if (!trimmed.toLowerCase().endsWith('/api/')) trimmed = trimmed.replace(/\/+$/, '') + '/api/';
   return trimmed;
@@ -180,7 +180,7 @@ const PublicBillView = ({ token }) => {
         <div className="public-bill-header">
           <div className="public-bill-header-accent" />
           <div className="public-bill-header-content">
-            <h1 className="public-bill-company-name">{companyName || 'MAGGI TOOLS'}</h1>
+            <h1 className="public-bill-company-name">{companyName || 'LION TOOLS'}</h1>
             <div className="public-bill-subtitle">Official Rental Receipt</div>
             {contactDisplay && (
               <div className="public-bill-contact-line">📞 {contactDisplay}</div>
@@ -313,7 +313,7 @@ const PublicBillView = ({ token }) => {
         {/* ── Footer ── */}
         <div className="public-bill-footer">
           <div className="public-bill-footer-brand">
-            {companyName || 'MAGGI TOOLS'}
+            {companyName || 'LION TOOLS'}
           </div>
           {contactDisplay && <div style={{ marginBottom: 4 }}>📞 {contactDisplay}</div>}
           <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 8 }}>

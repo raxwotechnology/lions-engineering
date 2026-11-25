@@ -166,7 +166,7 @@ function buildItemsBreakdown(bookingData = {}) {
 }
 
 function buildSampleBillLink() {
-  return 'View Bill: https://maggi-tool-rentals.netlify.app/bill/sample-token';
+  return 'View Bill: https://lion-tools.netlify.app/bill/sample-token';
 }
 
 function migrateBookingTemplate(template) {
@@ -195,14 +195,14 @@ export function isLegacyShortTemplate(template) {
   return t.length < 120 && t.includes('Dear {clientName}');
 }
 
-export function resolveBookingTemplate(stored, companyName = 'MAGGI TOOLS') {
+export function resolveBookingTemplate(stored, companyName = 'LION TOOLS') {
   if (isLegacyShortTemplate(stored)) {
     return DEFAULT_SMS_BOOKING_TEMPLATE.replace(/\{companyName\}/g, companyName);
   }
   return migrateBookingTemplate(stored).replace(/\{companyName\}/g, companyName);
 }
 
-export function previewSmsTemplate(template, companyName = 'MAGGI TOOLS') {
+export function previewSmsTemplate(template, companyName = 'LION TOOLS') {
   const booking = { ...SAMPLE_BOOKING };
   const itemsBreakdown = buildItemsBreakdown(booking);
   const billLink = buildSampleBillLink();
@@ -251,8 +251,8 @@ export function previewSmsTemplate(template, companyName = 'MAGGI TOOLS') {
 }
 
 export function previewAdvanceSmsTemplate(template, settings = {}) {
-  const companyName = settings?.companyName || 'MAGGI TOOLS';
-  const billLink = 'View Bill: https://maggi-tools.netlify.app/bill/sample-token';
+  const companyName = settings?.companyName || 'LION TOOLS';
+  const billLink = 'View Bill: https://lion-tools.netlify.app/bill/sample-token';
   let result = (template && template.trim()) ? template.trim() : DEFAULT_SMS_ADVANCE_TEMPLATE;
   const replacements = {
     '{clientName}': 'Sample Customer',

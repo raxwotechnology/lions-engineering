@@ -1,9 +1,9 @@
 @echo off
-TITLE Maggi Tool Rental System - Launcher
+TITLE Lion Tools Rental System - Launcher
 COLOR 0B
 
 echo ===================================================
-echo   MAGGI TOOL RENTAL MANAGEMENT SYSTEM
+echo   LION TOOLS RENTAL MANAGEMENT SYSTEM
 echo ===================================================
 echo.
 echo [1/2] Launching Backend Server (Node.js) on port 5001...

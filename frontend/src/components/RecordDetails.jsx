@@ -29,7 +29,7 @@ const QuotationDocumentView = ({ data }) => {
   if (!data) return null;
 
   const activeLogo = settings?.logo || logoUrl;
-  const companyName = settings?.companyName || settings?.name || 'MAGGI TOOLS';
+  const companyName = settings?.companyName || settings?.name || 'LION TOOLS';
   const companyAddress = settings?.address || 'No. 241, Rajamaha Vihara Rd, Mirihana, Kotte.';
   const companyEmail = settings?.email || 'sampathperera253@gmail.com';
   const companyPhones = Array.isArray(settings?.phones) && settings.phones.length > 0
@@ -448,7 +448,7 @@ const RecordDetails = ({ data: initialData, type, onDataChange }) => {
     const paid = Number(data.advancePayment || 0).toLocaleString();
     const bal = Number(data.balanceAmount || 0).toLocaleString();
     const msg = encodeURIComponent(
-      `Hello ${data.clientName || 'Customer'},\nHere is your rental bill from MAGGI TOOLS:\nTotal: LKR ${total}\nPaid: LKR ${paid}\nBalance Due: LKR ${bal}\n\nView Bill Details online:\n${billUrl}\n\nThank you!`
+      `Hello ${data.clientName || 'Customer'},\nHere is your rental bill from LION TOOLS:\nTotal: LKR ${total}\nPaid: LKR ${paid}\nBalance Due: LKR ${bal}\n\nView Bill Details online:\n${billUrl}\n\nThank you!`
     );
     window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
   };
