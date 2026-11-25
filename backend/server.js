@@ -17,6 +17,7 @@ const allowedOrigins = [
   'https://krishan-transport-frontend.vercel.app',
   'https://raxwo-rent-a-car.netlify.app',
     'https://lion-tools.netlify.app',
+    'https://lions-engineering.netlify.app',
     process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -41,14 +42,20 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 const dbUri = process.env.MONGODB_URI;
 const dbName = dbUri ? dbUri.split('/').pop().split('?')[0] : 'unknown';
 
+let lastDbError = null;
+
 if (!dbUri) {
   console.error("⚠️ MONGODB_URI is not set!");
 } else {
   mongoose.connect(dbUri)
     .then(() => {
+      lastDbError = null;
       console.log(`✅ MongoDB Connected to database: ${dbName}`);
     })
-    .catch(err => console.error('❌ MongoDB Connection Error:', err));
+    .catch(err => {
+      lastDbError = err.message;
+      console.error('❌ MongoDB Connection Error:', err);
+    });
 }
 
 // Routes
@@ -72,6 +79,20 @@ app.use('/api/expenses', require('./routes/expenses'));
 app.use('/api/accounts', require('./routes/accounts'));
 app.use('/api/cheques', require('./routes/cheques'));
 app.use('/api/settings', require('./routes/settings'));
+
+app.get('/api/health', (req, res) => {
+  const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+  const state = states[mongoose.connection.readyState] || 'unknown';
+  res.json({
+    status: 'ok',
+    database: {
+      state,
+      connected: mongoose.connection.readyState === 1,
+      dbName: dbName || 'unknown',
+      lastError: lastDbError
+    }
+  });
+});
 
 app.get('/', (req, res) => {
   res.send('Lion Tools Rental System API is running...');
